@@ -66,6 +66,49 @@ class Solution:
             if slow == fast:
                 return True
         return False
+    
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        if not head:
+            return
+
+        nodes = []
+        cur = head
+        while cur:
+            nodes.append(cur)
+            cur = cur.next
+
+        i, j = 0, len(nodes) - 1
+        while i < j:
+            nodes[i].next = nodes[j]
+            print('i',nodes[i].val)
+            print('i',nodes[i].next.val)
+            i += 1
+            print('i + 1',nodes[i].val)
+            print('i + 1',nodes[i].next.val)
+            if i >= j:
+                break
+            nodes[j].next = nodes[i]
+            print('j',nodes[j].val)
+            print('j',nodes[j].next.val)
+            print('i ', nodes[i].val)
+            print('i ',nodes[i].next.val)
+            j -= 1
+            print('j',nodes[j].val)
+            print('j -1',nodes[j].next.val)
+        
+        nodes[i].next = None
+        printNode(head)
+
+
+def printNode(head: Optional[ListNode]) -> None:
+        # Print list
+        curr = head
+        while curr:
+            print(curr.val, end=" -> " if curr.next else "\n")
+            curr = curr.next
+            if not curr:
+                print("End of list reached")
+
 
 def build_linked_list(values: List[int]) -> ListNode:
     if not values:
@@ -77,39 +120,30 @@ def build_linked_list(values: List[int]) -> ListNode:
         curr = curr.next
     return head
 
-# Example usage:
-head = build_linked_list([1, 2, 3, 4])
-list1 = build_linked_list([1, 2, 4])
-list2 = build_linked_list([1, 3, 5])
-cycle_linked_list = build_linked_list([1, 2, 3, 4])
 
 sol = Solution()
-# Call the reverse function
-reversed_head = sol.reverseList(head)
+# # Call the reverse function
+# head = build_linked_list([1, 2, 3, 4])
+# reversed_head = sol.reverseList(head)
 
-#Merge Link list
-mergeLinkList = sol.mergeTwoLists(list1, list2)
+# #Merge Link list
+# list1 = build_linked_list([1, 2, 4])
+# list2 = build_linked_list([1, 3, 5])
+# mergeLinkList = sol.mergeTwoLists(list1, list2)
 
-# Call the hasCycle function
-# Find the last node
-last = cycle_linked_list
-while last.next:
-    last = last.next
+# # Call the hasCycle function
+# # Find the last node
+# cycle_linked_list = build_linked_list([1, 2, 3, 4])
+# last = cycle_linked_list
+# while last.next:
+#     last = last.next
 
-# Create a cycle: point last node (4) back to node 2
-print(last.val)
-last.next = cycle_linked_list.next  # head.next is node 2
-has_cycle = sol.hasCycle(cycle_linked_list)
-print(has_cycle)
+# # Create a cycle: point last node (4) back to node 2
+# print(last.val)
+# last.next = cycle_linked_list.next  # head.next is node 2
+# has_cycle = sol.hasCycle(cycle_linked_list)
+# print(has_cycle)
 
-# Print the reversed list
-while reversed_head:
-    print(reversed_head.val, end=" -> " if reversed_head.next else "\n")
-    reversed_head = reversed_head.next
-
-# Print the merged list
-# while mergeLinkList:
-#     print(mergeLinkList.val, end=" -> " if mergeLinkList.next else "\n")
-#     mergeLinkList = mergeLinkList.next
-
-        
+#reorderList
+newHead = build_linked_list([2,4,6,8])
+sol.reorderList(newHead)
