@@ -1,3 +1,4 @@
+import math
 from typing import List
 
 nums = [-1, 0, 2, 4, 6, 8]
@@ -30,6 +31,23 @@ def mySqrt(x: int) -> int:
     print(m)
     return m
 
+def minEatingSpeed(piles: List[int], h: int) -> int:
+    l , r = 1 , max(piles)
+    res = r
+
+    while l <= r:
+        k = (l + r)//2
+        hours = 0
+        for p in piles:
+            hours += p//k
+            print(hours, k)
+        if hours <= h:
+            res = k
+            r = k - 1
+        else:
+            l = k + 1    
+    return res
+
 
 
 matrix = [[1,2,4,8],[10,11,12,13],[14,20,30,40]]
@@ -50,6 +68,7 @@ def searchMatrix(matrix: List[List[int]], target: int) -> bool:
             return True
     return False
 
-searchMatrix(matrix, target)
+# searchMatrix(matrix, target)
 # search(nums, target)
 # mySqrt(9)
+print(minEatingSpeed([1,4,3,2], 9))
