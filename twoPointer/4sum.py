@@ -37,5 +37,6 @@ def fourSum(nums: List[int], target: int) -> List[List[int]]:
                 quad.pop()
 
         kSum(4, 0, target)
+        print('res',res)
         return res 
-   
+fourSum([1,0,-1,0,-2,2], 0)
